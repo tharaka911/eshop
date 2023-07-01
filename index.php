@@ -46,40 +46,66 @@
 
                             <div class="col-6">
                                 <label class="form-lable">First Name</label>
-                                <input type="text" class="form-control" placeholder="lakshan">
+                                <input type="text" class="form-control" placeholder="lakshan" id="fname">
                             </div>
 
                             <div class="col-6">
                                 <label class="form-lable">Last Name</label>
-                                <input type="text" class="form-control" placeholder="Tharaka">
+                                <input type="text" class="form-control" placeholder="Tharaka" id="lname">
                             </div>
 
                             <div class="col-12">
                                 <label class="form-lable">Email</label>
-                                <input type="email" class="form-control" placeholder="lakshan@spaceX.com">
+                                <input type="email" class="form-control" placeholder="lakshan@spaceX.com" id="email" >
                             </div>
 
                             <div class="col-12">
                                 <label class="form-lable">Password</label>
-                                <input type="text" class="form-control" placeholder="lakshan@spaceX.com">
+                                <input type="text" class="form-control" placeholder="lakshan@spaceX.com" id="password" >
                             </div>
 
                             <div class="col-6">
                                 <label class="form-lable">Mobile</label>
-                                <input type="email" class="form-control" placeholder="070 999 9999">
+                                <input type="email" class="form-control" placeholder="070 999 9999" id="mobile" >
                             </div>
 
                             <div class="col-6">
                                 <label class="form-lable">Gender</label>
-                                <select class="form-select">
-                                    <option selected>Select Your Gender</option>
+                                <select class="form-select" id="gender" >
+                                    <option value="0">Select Your Gender</option>
+                                    <!-- 
                                     <option value="1">Male</option>
                                     <option value="2">Femail</option>
+                                    -->
+
+                                    <!-- getting data form db and fetch the dropdown -->
+                                    <?php
+                                       require "connection.php";
+
+                                       $rs = Database::search("SELECT * FROM `gender`");
+                                       $n = $rs->num_rows;
+
+                                        for($i=0; $i < $n; $i++){
+                                             $row = $rs->fetch_assoc(); 
+                                         
+                                    ?>
+
+                                        <option value="<?php echo $row["id"];?>"><?php echo $row["gender_name"];?></option>
+                                    
+                                    <?php
+
+                                    }
+
+                                    ?>
+
+
+
+                                   
                                 </select>
                             </div>
 
                             <div class="col-12 col-lg-6 d-grid mt-3">
-                                <button class="btn btn-primary">Sign Up</button>
+                                <button class="btn btn-primary" onclick="signUp();">Sign Up</button>
                             </div>
 
                             <div class="col-12 col-lg-6 d-grid mt-3">
@@ -153,7 +179,6 @@
                         </div>
 
                     <!-- footer -->
-
 
                 </div>
             </div>
