@@ -44,6 +44,13 @@
                                 <p class="title02">Create New Account.</p>
                             </div>
 
+                            <div class="col-12 d-none" id="msgdiv">
+                                <div class="alert alert-danger" role="alert" id="msg" >
+
+                                </div>
+
+                            </div>
+
                             <div class="col-6">
                                 <label class="form-lable">First Name</label>
                                 <input type="text" class="form-control" placeholder="lakshan" id="fname">

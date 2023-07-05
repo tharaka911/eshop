@@ -41,7 +41,29 @@ function signUp() {
   r.onreadystatechange = function() {
     if (r.readyState == 4 && r.status == 200) {
       var t = r.responseText;
-      alert(t);
+      
+
+      if (t == "success") {
+        document.getElementById("msg").innerHTML =t;
+        document.getElementById("msg").className ="alert alert-success";
+        document.getElementById("msgdiv").className ="d-block";
+
+        //clear the UI elements
+        document.getElementById("fname").value ="";
+        document.getElementById("lname").value ="";
+        document.getElementById("email").value ="";
+        document.getElementById("password").value ="";
+        document.getElementById("mobile").value ="";
+        document.getElementById("gender").value ="";
+        
+
+      }else {
+        document.getElementById("msg").innerHTML =t;
+        document.getElementById("msgdiv").className ="d-block";
+
+      }
+      
+     
     }
   }
 

@@ -58,7 +58,10 @@ else if($gender==0){
 else{
     //checking whether the user is already exists
     $rs = Database::search("SELECT * FROM `users` WHERE `email` = '".$email."' OR `mobile` = '".$mobile."'");
-    echo($rs);
+
+    // $jsonResult = json_encode($rs); // Convert the array to JSON
+    // echo $jsonResult; // Sending back down as JSON
+
     //getting the number of rows inside $rs
     $n = $rs->num_rows;
     //checking 
