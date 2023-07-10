@@ -4,7 +4,7 @@ class Database{
 
     public static $connection;
 
-    public static function setUpConnect(){
+    private static function setUpConnect(){
         if(!isset(Database::$connection)){
             Database::$connection = new mysqli("localhost", "root", "=eO_#p-.dzY#Z2g" ,"eshop", "3306");
         }
