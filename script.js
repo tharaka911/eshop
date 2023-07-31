@@ -69,3 +69,37 @@ function signUp() {
 
 
 }
+
+function signin(){
+  var email = document.getElementById("email2");
+  var password = document.getElementById("password2");
+  var rememberme = document.getElementById("rememberme");
+  
+  // alert(email.value);
+  // alert(password.value);
+  // alert(rememberme.checked);
+
+  var f = new FormData();
+  f.append("e", email.value);
+  f.append("p", password.value);
+  f.append("r", rememberme.checked);
+
+  var r = new XMLHttpRequest();
+  //this is like map
+  r.open("POST", "signinProcess.php", true);
+  //sending the data
+  r.send(f);
+
+  r.onreadystatechange = function() {
+    if (r.readyState == 4 && r.status == 200) {
+      var t = r.responseText;
+      // alert(t);
+      if (t == "success") {
+        window.location = "home.php";
+      }else {
+        alert(t);
+      }
+    }
+  }
+
+}

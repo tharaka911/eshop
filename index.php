@@ -138,12 +138,12 @@
 
                             <div class="col-12">
                                 <label class="form-lable">Email</label>
-                                <input type="email" class="form-control" placeholder="lakshan@spaceX.com" />
+                                <input type="email" class="form-control" placeholder="lakshan@spaceX.com" id="email2" />
                             </div>
 
                             <div class="col-12">
                                 <label class="form-lable">Password</label>
-                                <input type="text" class="form-control" placeholder="**********" />
+                                <input type="text" class="form-control" placeholder="**********" id="password2" />
                             </div>
 
                             <div class="col-6">
@@ -160,7 +160,7 @@
                             </div>
 
                             <div class="col-12 col-lg-6 d-grid mt-3">
-                                <button class="btn btn-primary">Sign In</button>
+                                <button class="btn btn-primary" onclick="signin();">Sign In</button>
                             </div>
 
                             <div class="col-12 col-lg-6 d-grid mt-3">
