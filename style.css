@@ -24,7 +24,7 @@
 
 *{
     font-family: "Quicksand";
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .title1{
@@ -47,4 +47,11 @@ letter-spacing: 3px;
     font-family: "Quicksand";
     font-size: 25px;
     font-weight: bold;
+}
+
+.cart-icon{
+    background-image:url("resources/cartico.svg");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
 }

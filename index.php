@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
 </head>
 
@@ -45,7 +46,7 @@
                             </div>
 
                             <div class="col-12 d-none" id="msgdiv">
-                                <div class="alert alert-danger" role="alert" id="msg" >
+                                <div class="alert alert-danger" role="alert" id="msg">
 
                                 </div>
 
@@ -63,22 +64,22 @@
 
                             <div class="col-12">
                                 <label class="form-lable">Email</label>
-                                <input type="email" class="form-control" placeholder="lakshan@spaceX.com" id="email" >
+                                <input type="email" class="form-control" placeholder="lakshan@spaceX.com" id="email">
                             </div>
 
                             <div class="col-12">
                                 <label class="form-lable">Password</label>
-                                <input type="text" class="form-control" placeholder="lakshan@spaceX.com" id="password" >
+                                <input type="text" class="form-control" placeholder="lakshan@spaceX.com" id="password">
                             </div>
 
                             <div class="col-6">
                                 <label class="form-lable">Mobile</label>
-                                <input type="email" class="form-control" placeholder="070 999 9999" id="mobile" >
+                                <input type="email" class="form-control" placeholder="070 999 9999" id="mobile">
                             </div>
 
                             <div class="col-6">
                                 <label class="form-lable">Gender</label>
-                                <select class="form-select" id="gender" >
+                                <select class="form-select" id="gender">
                                     <option value="0">Select Your Gender</option>
                                     <!-- 
                                     <option value="1">Male</option>
@@ -87,18 +88,18 @@
 
                                     <!-- getting data form db and fetch the dropdown -->
                                     <?php
-                                       require "connection.php";
+                                    require "connection.php";
 
-                                       $rs = Database::search("SELECT * FROM `gender`");
-                                       $n = $rs->num_rows;
+                                    $rs = Database::search("SELECT * FROM `gender`");
+                                    $n = $rs->num_rows;
 
-                                        for($i=0; $i < $n; $i++){
-                                             $row = $rs->fetch_assoc(); 
-                                         
+                                    for ($i = 0; $i < $n; $i++) {
+                                        $row = $rs->fetch_assoc();
+
                                     ?>
 
-                                        <option value="<?php echo $row["id"];?>"><?php echo $row["gender_name"];?></option>
-                                    
+                                        <option value="<?php echo $row["id"]; ?>"><?php echo $row["gender_name"]; ?></option>
+
                                     <?php
 
                                     }
@@ -107,7 +108,7 @@
 
 
 
-                                   
+
                                 </select>
                             </div>
 
@@ -136,14 +137,30 @@
                                 <p class="title02">Sign In</p>
                             </div>
 
+                            <?php
+
+
+                            if (isset($_COOKIE["email"])) {
+                                $email = $_COOKIE["email"];
+                            }
+                            if (isset($_COOKIE["password"])) {
+                                $password = $_COOKIE["password"];
+                            } else {
+                                $email = "";
+                                $password = "";
+                            }
+
+
+                            ?>
+
                             <div class="col-12">
                                 <label class="form-lable">Email</label>
-                                <input type="email" class="form-control" placeholder="lakshan@spaceX.com" id="email2" />
+                                <input type="email" class="form-control" placeholder="lakshan@spaceX.com" id="email2" value="<?php echo $email; ?>" />
                             </div>
 
                             <div class="col-12">
                                 <label class="form-lable">Password</label>
-                                <input type="text" class="form-control" placeholder="**********" id="password2" />
+                                <input type="text" class="form-control" placeholder="**********" id="password2" value="<?php echo $password; ?>" />
                             </div>
 
                             <div class="col-6">
@@ -156,7 +173,7 @@
                             </div>
 
                             <div class="col-6 text-end">
-                                <a href="#" class="link-primary"> Forgotten password?</a>
+                                <a href="#" class="link-primary" onclick="forgotPassword();"> Forgotten password?</a>
                             </div>
 
                             <div class="col-12 col-lg-6 d-grid mt-3">
@@ -175,26 +192,69 @@
 
                     <!-- content -->
 
+                    <!-- model -->
+                    <div class="modal tabindex=" -1" id="forgotPasswordModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Forget Password</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row g-3">
+                                        <div class="col-6">
+                                            <label class="form-lable">New Password</label>
+                                            <div class="input-group mb-3">
+                                                <input type="password" class="form-control" id="np" />
+                                                <button class="btn btn-outline-secondary" type="button" id="npb" onclick="showPassword();"><i class="bi bi-eye"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <label class="form-lable">Retype New Password</label>
+                                            <div class="input-group mb-3">
+                                                <input type="password" class="form-control" id="np-2" />
+                                                <button class="btn btn-outline-secondary" type="button" id="npb-2" onclick="showPassword2();"><i class="bi bi-eye"></i></button>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label class="form-label">Verification Code</label>
+                                            <input type="text" class="form-control" id="vc"/>
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" onclick="resetPassword();">Reset Password</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- model -->
+
 
                     <!-- footer -->
 
                     <div class="col-12 d-none d-lg-block fixed-bottom">
                         <div class="row">
-                            
-                                <p class="text-center">&copy; 20233 eSop.lk | All Right Reserved</p>
-                            
+
+                            <p class="text-center">&copy; 20233 eSop.lk | All Right Reserved</p>
+
                         </div>
 
-                    <!-- footer -->
+                        <!-- footer -->
 
+                    </div>
                 </div>
-            </div>
 
 
 
 
 
-            <script src="script.js"></script>
+                <script src="script.js"></script>
+                <script src="bootstrap.js"></script>
 </body>
 
 </html>
