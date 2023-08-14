@@ -1,3 +1,8 @@
+<?php
+session_start();
+require "connection.php";
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -31,10 +36,27 @@
 
                             <select class="form-select" style="max-width:250px;">
                                 <option value="0">All Categories</option>
-                                <option value="1">Smart Phones</option>
+                                <!-- <option value="1">Smart Phones</option>
                                 <option value="2">Laptops</option>
                                 <option value="3">Cameras</option>
-                                <option value="4">Drone</option>
+                                <option value="4">Drone</option> -->
+                                <?php
+                                $categoty_rs = Database::search("SELECT * FROM `category`");
+                                $categoty_num = $categoty_rs->num_rows;
+
+                                for ($x = 0; $x < $categoty_num; $x++) {
+                                    $category_data = $categoty_rs->fetch_assoc();
+                                ?>
+                                    <option value="<?php echo $category_data["cat_id"]; ?>">
+                                        <?php echo $category_data["cat_name"]; ?>
+
+                                    </option>
+
+                                <?php
+                                }
+                                ?>
+
+
                             </select>
                         </div>
                     </div>
@@ -64,18 +86,18 @@
                             </div>
                             <div class="carousel-inner">
                                 <div class="carousel-item active" data-bs-interval="2000">
-                                    <img src="resources/slider images/posterimg.jpg" class="d-block poster-img-1"/>
+                                    <img src="resources/slider images/posterimg.jpg" class="d-block poster-img-1" />
                                     <div class="carousel-caption d-none d-md-block poster-caption">
-                                        <h5 class="poster-titel" >Welcome to eShop</h5>
-                                        <p class="poster-txt" >The World's Best Online Store By One Click.</p>
+                                        <h5 class="poster-titel">Welcome to eShop</h5>
+                                        <p class="poster-txt">The World's Best Online Store By One Click.</p>
                                     </div>
                                 </div>
                                 <div class="carousel-item" data-bs-interval="2000">
                                     <img src="resources/slider images/posterimg2.jpg" class="d-block poster-img-1" />
-                                    
+
                                 </div>
                                 <div class="carousel-item" data-bs-interval="2000">
-                                    <img src="resources/slider images/posterimg3.jpg" class="d-block poster-img-1" >
+                                    <img src="resources/slider images/posterimg3.jpg" class="d-block poster-img-1">
                                     <div class="carousel-caption d-none d-md-block poster-caption-1">
                                         <h5 class="poster-titel">Be Free.....</h5>
                                         <p class="poster-txt">Experience the lowest Delivery cost with us</p>
@@ -92,6 +114,62 @@
                             </button>
                         </div>
                         <!-- carousal -->
+
+                        <!-- categoty names -->
+
+                        <?php
+                        $c_rs = Database::search("SELECT * FROM `category`");
+                        $c_num = $c_rs->num_rows;
+                        for ($y = 0; $y < $c_num; $y++) {
+
+                            $c_data = $c_rs->fetch_assoc();
+                        ?>
+
+                            <div class="col-12 mt-3 mb-3">
+                                <a href="#" class="text-decoration-none text-dark fs-3 fw-bold ">
+                                    <?php echo $c_data["cat_name"]; ?>
+                                </a>&nbsp;&nbsp;
+                                <a href="#" class="text-decoration-none text-dark fs-6 fw-bold ">See All&nbsp;&rarr;</a>
+                            </div>
+                            <!-- products -->
+                            <div class="col-12 mb-3">
+                                <div class="row border border-primary">
+    
+                                    <div class="col-12">
+                                        <div class="row justify-content-center gap -2">
+
+                                            <div class="card col-12 col-lg-2 mt-2 mb-2" style="width: 18rem;">
+                                                <img src="resources/mobile_images/iphone12.jpg" 
+                                                class="card-img-top img-thumbnail mt-2" style="height:180px;">
+                                                <div class="card-body ms-0 m-0 text-center">
+                                                    <h5 class="card-title fw-bold fs-6">iPhone 12</h5>
+                                                    <span class ="badge rounded-pill text-bg-info">New</span><br/>
+                                                    <span class ="card-text text-primary">Rs. 100,000.00</span><br/>
+                                                    <span class ="card-text text-warning fw-bold">In Stock</span><br/>
+                                                    <span class ="card-text text-succees fw-bold">10 Items Available<br/>
+                                                    <button class="col-12 btn btn-success">Buy Now</button>
+                                                    <button class="col-12 btn btn-dark mt-2">
+                                                        <i class ="bi bi-cart4 text-white fs-5"></i>
+                                                    </button>
+                                                    <button class="col-12 btn btn-outline-light mt-2 border border-primary">
+                                                        <i class ="bi bi-heart-fill text-dark fs-5"></i>                                                        
+                                                    </button>
+                                                    
+                                                </div>
+                                            </div>
+    
+                                        </div>
+                                    </div>
+    
+    
+                                </div>
+                            </div>
+                            <!-- products -->
+                        <?php
+                        }
+                        ?>
+                        <!-- categoty names -->
+
 
                     </div>
 
