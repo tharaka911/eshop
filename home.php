@@ -138,25 +138,64 @@ require "connection.php";
                                     <div class="col-12">
                                         <div class="row justify-content-center gap -2">
 
-                                            <div class="card col-12 col-lg-2 mt-2 mb-2" style="width: 18rem;">
-                                                <img src="resources/mobile_images/iphone12.jpg" 
-                                                class="card-img-top img-thumbnail mt-2" style="height:180px;">
-                                                <div class="card-body ms-0 m-0 text-center">
-                                                    <h5 class="card-title fw-bold fs-6">iPhone 12</h5>
-                                                    <span class ="badge rounded-pill text-bg-info">New</span><br/>
-                                                    <span class ="card-text text-primary">Rs. 100,000.00</span><br/>
-                                                    <span class ="card-text text-warning fw-bold">In Stock</span><br/>
-                                                    <span class ="card-text text-succees fw-bold">10 Items Available<br/>
-                                                    <button class="col-12 btn btn-success">Buy Now</button>
-                                                    <button class="col-12 btn btn-dark mt-2">
-                                                        <i class ="bi bi-cart4 text-white fs-5"></i>
-                                                    </button>
-                                                    <button class="col-12 btn btn-outline-light mt-2 border border-primary">
-                                                        <i class ="bi bi-heart-fill text-dark fs-5"></i>                                                        
-                                                    </button>
-                                                    
+                                            <?php
+                                            
+                                                $product_rs = Database::search("SELECT * FROM `product` WHERE `category_cat_id` = '".$c_data['cat_id']."' 
+                                                AND `status_status_id`=1 ORDER BY `datetime_added` DESC LIMIT 4 OFFSET 0");
+
+                                                $product_num = $product_rs->num_rows;
+
+                                                for ($x = 0; $x < $product_num; $x++) {
+                                                    $product_data = $product_rs->fetch_assoc();
+                                                ?>
+
+                                                    <div class="card col-12 col-lg-2 mt-2 mb-2" style="width: 18rem;">
+
+                                                    <?php
+                                                
+                                                        $img_rs = Database::search("SELECT * FROM `product_img` WHERE 
+                                                        `product_id`='".$product_data['id']."'");
+
+                                                        $img_data = $img_rs->fetch_assoc();
+                                                
+                                                    ?>
+
+
+
+
+                                                    <img src="<?php echo $img_data["img_path"]; ?>" 
+                                                    class="card-img-top img-thumbnail mt-2" style="height:180px;">
+                                                    <div class="card-body ms-0 m-0 text-center">
+                                                        <h5 class="card-title fw-bold fs-6"><?php echo $product_data["title"]; ?></h5>
+                                                        <span class ="badge rounded-pill text-bg-info">New</span><br/>
+                                                        <span class ="card-text text-primary">Rs. <?php echo $product_data["price"]; ?> .00</span><br/>
+                                                        <span class ="card-text text-warning fw-bold">In Stock</span><br/>
+                                                        <span class ="card-text text-succees fw-bold"><?php echo $product_data["qty"]; ?> Items Available<br/>
+                                                        <button class="col-12 btn btn-success">Buy Now</button>
+                                                        <button class="col-12 btn btn-dark mt-2">
+                                                            <i class ="bi bi-cart4 text-white fs-5"></i>
+                                                        </button>
+                                                        <button class="col-12 btn btn-outline-light mt-2 border border-primary">
+                                                            <i class ="bi bi-heart-fill text-dark fs-5"></i>                                                        
+                                                        </button>
+                                                        
+                                                    </div>
                                                 </div>
-                                            </div>
+
+
+
+                                            <?php
+
+
+                                            }
+
+
+
+
+
+                                            
+                                            ?>
+                                            
     
                                         </div>
                                     </div>

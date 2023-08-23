@@ -185,3 +185,27 @@ function showPassword2() {
   }
 }
 
+
+function signout() {
+ alert("hello from signout");
+
+
+  var r = new XMLHttpRequest();
+
+  r.onreadystatechange = function () {  
+    if (r.readyState == 4 && r.status == 200) {
+      var t = r.responseText;
+      // alert(t);
+      if (t =="success") {
+        window.location.reload();
+      } else {
+        alert(t);
+      }
+    }
+  };  
+
+  r.open("GET", "signoutProcess.php", true);
+  r.send();
+
+
+}
